@@ -66,7 +66,7 @@ public class NotRecentlyUsed {
         // 2- Incrementar todos existentes se não existir na memória o processo
         // 3- A referencia torna 0 se adicionar algum processo a memória
         boolean exist = Boolean.FALSE;
-        if (ram != null) {
+        if (ram != null) { // = 0
             for (Processo processo : ram) {
                 // Se existir 1 processo existente, ele fica referenciado e zera seu ciclo de
                 // vida
@@ -84,7 +84,7 @@ public class NotRecentlyUsed {
             for (Processo processo : ram) {
                 if (!processo.getID().equals(opcao)) {
                     processo.setC(processo.getC() + 1);
-                }
+                }  // 7 0 1 -> 0 -> 7 0 1 -> 7*1 && 1*1
             }
         }
 
@@ -131,7 +131,7 @@ public class NotRecentlyUsed {
 
         // caso não exista...
         if (!exist) {
-            int menorClasse = 0;
+            int menorClasse = 0; // menor classe = 0
             Processo vaiSair = null;
             for (Processo processo : ram) {
                 // Iniciamos o primeiro processo como comparador
@@ -140,12 +140,13 @@ public class NotRecentlyUsed {
                 } else {
                     // Caso a classe do processo atual seja maior do qual está alocado, adicionamos
                     // ele
-                    if (getType(processo) < menorClasse) {
+                    if (getType(processo) < menorClasse) { // 0 1 2 3
                         vaiSair = processo;
                     }
                     // Caso o processo atual tenha a mesma classe porém o
                     // ciclo dela seja maior, ela será alocada
                     if (getType(vaiSair) == getType(processo) && processo.getC() > vaiSair.getC()) {
+                        // 0 -> 0
                         vaiSair = processo;
                     }
                 }
@@ -154,6 +155,7 @@ public class NotRecentlyUsed {
             int i = 0;
             for (Processo processo : ram) {
                 if (vaiSair.getID().equals(processo.getID())) {
+                    // 3 posições
                     ram.set(i, new Processo(opcao, 1, 0, 0));
                     pageFault++;
                     continue;

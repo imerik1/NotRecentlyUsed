@@ -5,9 +5,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Processo {
-    private String ID;
-    private Integer R;
-    private Integer M;
-    private Integer C;
-
+    private String ID; // a 1
+    private Integer R; // referenced
+    private Integer M; // modified
+    private Integer C; // clock
 }
