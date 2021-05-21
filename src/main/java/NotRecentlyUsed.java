@@ -31,8 +31,8 @@ public class NotRecentlyUsed {
                     break;
                 }
             }
-            System.out.print("Digite o número do processo(Apenas processos de LEITURA)\nProcesso: ");
-            int opcao = entrada.nextInt();
+            System.out.print("Digite o nome(número ou letra) do processo(Apenas processos de LEITURA)\nProcesso: ");
+            String opcao = entrada.next();
             if (ram == null || ram.size() < 3) {
                 // Cria os três primeiros números
                 createMemory(opcao);
@@ -60,7 +60,7 @@ public class NotRecentlyUsed {
         }
     }
 
-    public static void createMemory(Integer opcao) {
+    public static void createMemory(String opcao) {
         // Casos dos 3 primeiros n
         // 1- O número pode existir na memória, zerar ele e referenciar
         // 2- Incrementar todos existentes se não existir na memória o processo
@@ -70,7 +70,7 @@ public class NotRecentlyUsed {
             for (Processo processo : ram) {
                 // Se existir 1 processo existente, ele fica referenciado e zera seu ciclo de
                 // vida
-                if (processo.getID() == opcao) {
+                if (processo.getID().equals(opcao)) {
                     processo.setR(1);
                     processo.setC(0);
                     exist = Boolean.TRUE;
@@ -82,7 +82,7 @@ public class NotRecentlyUsed {
         // Não sabemos se realmente existe um processo igual aquele
         if (exist) {
             for (Processo processo : ram) {
-                if (processo.getID() != opcao) {
+                if (!processo.getID().equals(opcao)) {
                     processo.setC(processo.getC() + 1);
                 }
             }
@@ -101,7 +101,7 @@ public class NotRecentlyUsed {
         }
     }
 
-    public static void managementMemory(Integer opcao) {
+    public static void managementMemory(String opcao) {
         // Caso de gerenciamento
         // Verificar se já existe na memória
         // A menor classe vai embora
@@ -112,7 +112,7 @@ public class NotRecentlyUsed {
         // Processo caso existe na memória
         // Mesmo processo da função acima
         for (Processo processo : ram) {
-            if (processo.getID() == opcao) {
+            if (processo.getID().equals(opcao)) {
                 exist = Boolean.TRUE;
                 processo.setR(1);
                 processo.setC(0);
@@ -123,7 +123,7 @@ public class NotRecentlyUsed {
         // Mesmo processo da função acima
         if (exist) {
             for (Processo processo : ram) {
-                if (processo.getID() != opcao) {
+                if (!processo.getID().equals(opcao)) {
                     processo.setC(processo.getC() + 1);
                 }
             }
@@ -153,7 +153,7 @@ public class NotRecentlyUsed {
             }
             int i = 0;
             for (Processo processo : ram) {
-                if (vaiSair.getID() == processo.getID()) {
+                if (vaiSair.getID().equals(processo.getID())) {
                     ram.set(i, new Processo(opcao, 1, 0, 0));
                     pageFault++;
                     continue;
