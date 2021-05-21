@@ -1,0 +1,7 @@
+.idea/
+.settings/
+test/
+target/
+.classpath
+.project
+*.MF
